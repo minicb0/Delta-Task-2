@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Runner</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <audio id="die" src="../assets/audio/die.wav"></audio>
+    <div id="wrapper">
+        <div id="top-container">
+            <div id="heading">Pro Runner</div>
+        </div>
+        <div id="nameDiv">
+            <label for="yourName">Enter your name: </label>
+            
+            <input type="text" id="yourName">
+            <div id="startDiv"><button id="start">Start</button></div>
+        </div>
+
+        <div id="highscoreDiv">
+            <table id="highscore">
+                <tr>
+                    <td>Player's Name</td>
+                    <td>High Score</td>
+                </tr>
+                <tr>
+                    <td><span id="highName">N/A</span></td>
+                    <td><span id="highScore">-</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <div id="game">
+                <div id="navs">
+                    <div id="score">Score</div>
+                    <div id="pauseDiv">
+                        <button id="pause">Pause</button>
+                    </div>
+                </div>
+                <div>
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

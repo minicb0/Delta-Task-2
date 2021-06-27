@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgb(189, 185, 185);
+    user-select: none;
+    font-size: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+#top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    /* border: 5px solid black; */
+}
+
+#canvas {
+    background-color: black;
+    border: 2px solid white;
+    box-shadow: 0 0 10px 3px #838383;
+    margin: 3px;
+    border-radius: 10px;
+}
+
+#highscore {
+    /* border: 5px solid black; */
+    border-spacing: 0px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#highscoreDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#highscore td {
+    font-size: 14px;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+#pause {
+    padding: 5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    border: 2px white solid;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+#pause:hover:enabled, #start:hover:enabled {
+    cursor: pointer;
+    border: 2px rgb(0, 0, 0) solid;
+    color: white;
+}
+
+#start {
+    padding: 5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    border: 2px white solid;
+    background-color: transparent;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+#heading {
+    margin: 5px;
+    font-size: 35px;
+}
+
+#nameDiv {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#nameDiv input {
+    margin: 5px;
+    font-size: 20px;
+    height: 25px;
+    width: 200px;
+}
+
+#nameDiv label {
+    font-size: 14px;
+}
+
+/* media queries */ 
+@media (max-width: 665px) {
+    #nameDiv {
+        display: block;
+    }
+    label {
+        display: block;
+    }
+    #startDiv {
+        display: inline;
+        float: right;
+    }
+}
+
+@media (max-width: 400px) {
+    #heading {
+        font-size: 25px;
+    }
+    body {
+        font-size: 15px;
+    }
+    #highscore td {
+        font-size: 12px;
+    }
+    #nameDiv input {
+        font-size: 17px;
+        height: 20px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 330px) {
+    #highscore td {
+        font-size: 10px;
+    }
+}
