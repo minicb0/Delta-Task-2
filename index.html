@@ -7,50 +7,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Runner</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
-    <audio id="die" src="../assets/audio/die.wav"></audio>
+    <img src="./assets/images/clock.png" id="clockImg" class="hide">
+    <img src="./assets/images/invisible.png" id="invisibleImg" class="hide">
+
     <div id="wrapper">
-        <div id="top-container">
-            <div id="heading">Pro Runner</div>
-        </div>
-        <div id="nameDiv">
-            <label for="yourName">Enter your name: </label>
-            
-            <input type="text" id="yourName">
-            <div id="startDiv"><button id="start">Start</button></div>
-        </div>
 
-        <div id="highscoreDiv">
-            <table id="highscore">
-                <tr>
-                    <td>Player's Name</td>
-                    <td>High Score</td>
-                </tr>
-                <tr>
-                    <td><span id="highName">N/A</span></td>
-                    <td><span id="highScore">-</span></td>
-                </tr>
-            </table>
-        </div>
-
-        <div>
-            <div id="game">
-                <div id="navs">
+        <div id="game">
+            <div id="navs">
+                <div id="scoresCoinsDiv">
                     <div id="score">Score</div>
-                    <div id="pauseDiv">
-                        <button id="pause">Pause</button>
+                    <div id="coins">
+                        <img src="./assets/images/coin.png" id="coinImg">
+                        <div id="coinsCount">0</div>
                     </div>
                 </div>
-                <div>
-                    <canvas id="canvas"></canvas>
+                <div id="pauseDiv">
+                    <div><img src="./assets/images/settings.png" id="settingsImg"></div>
+                    <button id="pause">New Game</button>
                 </div>
+            </div>
+            <div id="gameArea">
+                <div id="popup">
+                    <div id="popupText"></div>
+                </div>
+                <canvas id="canvas" class=""></canvas>
             </div>
         </div>
 
+        <div id="bottom-container" class="">
+            <div id="navContent">
+
+                <div id="nameDiv">
+                    <div id="nameLabelDiv">
+                        <label for="yourName">Enter your name: </label>
+                        <input type="text" id="yourName">
+                    </div>
+                    <div id="newGameDiv"><button id="newGame">New Game</button></div>
+                </div>
+
+                <div id="selectDiv">
+                    <div>
+                        Background Music:
+                        <img src="./assets/images/musicOn.png" id="musicOnImg">
+                        <img src="./assets/images/musicOff.png" id="musicOffImg" class="hide">
+                    </div>
+                    <div>
+                        Sound Effects:
+                        <img src="./assets/images/unmute.png" id="unmuteImg">
+                        <img src="./assets/images/mute.png" id="muteImg" class="hide">
+                    </div>
+                    <div>
+                        <label for="runnerSelect">Runner Shape:</label>
+                        <select name="runnerSelect" id="runnerShape">
+                            <option value="square">Square</option>
+                            <option value="triangle">Triangle</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="difficultySelect">Difficulty Level:</label>
+                        <select name="difficultySelect" id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="highscoreDiv">
+                    <table id="highscore">
+                        <tr>
+                            <td>Player's Name</td>
+                            <td>High Score</td>
+                        </tr>
+                        <tr>
+                            <td><span id="highName">N/A</span></td>
+                            <td><span id="highScore">-</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 

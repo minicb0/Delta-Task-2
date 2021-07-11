@@ -12,82 +12,113 @@ body {
     background-color: rgb(189, 185, 185);
     user-select: none;
     font-size: 20px;
-    font-family: 'Press Start 2P', cursive;
-}
-
-#top-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* font-family: 'Press Start 2P', cursive; */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #navs {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
-    /* border: 5px solid black; */
+    /* margin: 10px; */
 }
 
-#canvas {
-    background-color: black;
-    border: 2px solid white;
-    box-shadow: 0 0 10px 3px #838383;
-    margin: 3px;
-    border-radius: 10px;
-}
-
-#highscore {
-    /* border: 5px solid black; */
-    border-spacing: 0px;
-    text-align: center;
-    border-collapse: collapse;
-}
-
-#highscoreDiv {
+#scoresCoinsDiv {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#highscore td {
-    font-size: 14px;
-    border: 2px solid black;
+#coins, #score {
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(44, 44, 44, 0.4);
     padding: 5px;
+    border-radius: 3px;
 }
 
-#pause {
+#coinImg {
+    width: 20px;
+    height: 20px;
+}
+
+#coinsCount {
+    /* margin: 5px; */
+    margin-left: 5px;
+}
+
+#pauseDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#settingsImg {
+    transition: transform .7s ease-in-out;
+    width: 50px;
+    height: 50px;
+}
+
+#settingsImg:hover {
+    cursor: pointer;
+    transform: rotate(30deg);
+}
+
+#pause, #newGame {
     padding: 5px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 18px;
+    /* font-family: 'Press Start 2P', cursive; */
+    font-size: 20px;
     border: 2px white solid;
     background-color: transparent;
     border-radius: 3px;
 }
 
-#pause:hover:enabled, #start:hover:enabled {
+#pause:hover:enabled, #newGame:hover:enabled {
     cursor: pointer;
     border: 2px rgb(0, 0, 0) solid;
     color: white;
 }
 
-#start {
-    padding: 5px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
-    border: 2px white solid;
-    background-color: transparent;
-    border-radius: 3px;
-    margin: 3px;
+#gameArea {
+    position: relative;
 }
 
-#heading {
+#popup {
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: all;
+    text-align: center;
+    height: 100px;
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    color: white;
+}
+
+#popupText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#canvas {
+    background-color: #A2DBFA;
+    border: 2px solid white;
+    box-shadow: 0 0 10px 3px #838383;
+    /* margin: 3px; */
+    border-radius: 10px;
+}
+
+#bottom-container {
     margin: 5px;
-    font-size: 35px;
+    border-radius: 5px;
+    padding: 3px;
 }
 
 #nameDiv {
-    margin: 15px;
+    /* margin: 15px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,43 +131,129 @@ body {
     width: 200px;
 }
 
-#nameDiv label {
-    font-size: 14px;
+#selectDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
 }
 
-/* media queries */ 
-@media (max-width: 665px) {
+#selectDiv div {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#musicOnImg, #muteImg, #musicOffImg, #unmuteImg {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+select {
+    font-size: 18px;
+    margin: 5px;
+}
+
+#highscoreDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#highscore {
+    border-spacing: 0px;
+    text-align: center;
+    /* border-spacing: 0; */
+    /* border-collapse: collapse; */
+}
+
+#highscore td {
+    border: 2px solid #ffffff;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#highscore tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#highscore tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#highscore tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+#highscore tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+.hide {
+    display: none;
+}
+
+/* media queries */
+@media (max-width: 1050px) {
     #nameDiv {
         display: block;
     }
-    label {
-        display: block;
+    #nameLabelDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    #startDiv {
-        display: inline;
-        float: right;
+    #newGameDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #selectDiv {
+        display: block;
     }
 }
 
 @media (max-width: 400px) {
-    #heading {
-        font-size: 25px;
-    }
     body {
         font-size: 15px;
     }
     #highscore td {
-        font-size: 12px;
+        font-size: 15px;
     }
     #nameDiv input {
         font-size: 17px;
         height: 20px;
         width: 150px;
     }
+    #pause, #newGame {
+        font-size: 15px;
+    }
+    #settingsImg {
+        width: 40px;
+        height: 40px;
+    }
+    #coinImg {
+        width: 17px;
+        height: 17px;
+    }
+    select {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 330px) {
-    #highscore td {
-        font-size: 10px;
+    #nameLabelDiv {
+        display: block;
+    }
+    #nameLabelDiv label {
+        display: block;
     }
 }
