@@ -5,6 +5,7 @@ canvas.height = 450;
 
 //declaring variables
 var settingsImg = document.getElementById('settingsImg');
+var rotateImg = document.getElementById('rotateImg');
 var pause = document.getElementById('pause');
 var input = document.getElementById('yourName');
 var newGame = document.getElementById('newGame');
@@ -48,6 +49,7 @@ var count = 0;
 var coins = 0;
 var speedTimer = 0;
 var invisibleTimer = 0;
+var rotateAngle = 0;
 var nameDisplay;
 var scoreDisplay;
 
@@ -64,6 +66,8 @@ var degree = 0;
 var invisibility = false;
 var systemSlow = false;
 var systemMini = false;
+var verticalGame = false;
+var gameOn = false;
 popupText.innerHTML = `Click Space or New Game Button to start the game!`;
 canvas.classList.add('disabled');
 
@@ -116,9 +120,21 @@ mediaQueries();
 
 //resize browser
 addEventListener('resize', () => {
-    canvas.width = innerWidth / 1.1;
-    canvas.height = 450;
+    rotateAngle = 0;
+    rotateImg.style.transform = `rotate(${rotateAngle}deg)`;
+    if (verticalGame == true) {
+        canvas.width = innerWidth / 1.1;
+        canvas.height = 450;
+        runnerTop = canvas.height * 3 / 4 - sizeOfParticle;
+    }
+    verticalGame = false;
     mediaQueries();
+    if (verticalGame == false) {
+        canvas.width = innerWidth / 1.1;
+        canvas.height = 450;
+        document.getElementById('nameDiv').style.removeProperty("display");
+        document.getElementById('selectDiv').style.removeProperty("display");
+    }
     // update();
 });
 
@@ -133,6 +149,42 @@ runnerShape.addEventListener('change', () => {
 
 settingsImg.addEventListener('click', () => {
     document.getElementById('bottom-container').classList.toggle('hide');
+})
+
+rotateImg.addEventListener('click', () => {
+    if (gameOn == false) {
+        clickSound.play();
+        if (rotateAngle == 0) {
+            rotateAngle = 90;
+            rotateImg.style.transform = `rotate(${rotateAngle}deg)`;
+            verticalGame = true;
+            if (systemMini == true) {
+                canvas.width = innerWidth / 1.1;
+                canvas.height = innerWidth / 1.1;
+            } else {
+                canvas.width = 600;
+                canvas.height = 600;
+                document.getElementById('nameDiv').style.display = "block"
+                document.getElementById('selectDiv').style.display = "block"
+            }
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(270 * (Math.PI / 180));
+            ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        } else if (rotateAngle == 90) {
+            rotateAngle = 0;
+            rotateImg.style.transform = `rotate(${rotateAngle}deg)`;
+            verticalGame = false;
+            if (systemMini == true) {
+                canvas.width = innerWidth / 1.1;
+                canvas.height = 450;
+            } else {
+                canvas.width = innerWidth / 1.1;
+                canvas.height = 450;
+                document.getElementById('nameDiv').style.removeProperty("display");
+                document.getElementById('selectDiv').style.removeProperty("display");
+            }
+        }
+    }
 })
 
 // utility function
@@ -518,6 +570,10 @@ function animate() {
 
 //game over
 function gameOver() {
+    gameOn = false;
+    rotateImg.parentElement.style.removeProperty("cursor");
+    rotateImg.style.removeProperty("cursor");
+    rotateImg.parentElement.style.removeProperty("opacity");
     backgroundSound.pause();
     pause.innerHTML = "New Game";
     input.disabled = false;
@@ -553,6 +609,10 @@ function newGameFunc() {
     pause.innerHTML = "Pause";
     invisibility = false;
     systemSlow = false;
+    gameOn = true;
+    rotateImg.parentElement.style.cursor = "not-allowed";
+    rotateImg.style.cursor = "not-allowed";
+    rotateImg.parentElement.style.opacity = "0.5";
 
     animate();
     mediaQueries();
