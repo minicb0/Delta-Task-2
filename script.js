@@ -68,6 +68,7 @@ var systemSlow = false;
 var systemMini = false;
 var verticalGame = false;
 var gameOn = false;
+var runnerPositionUp = false;
 popupText.innerHTML = `Click Space or New Game Button to start the game!`;
 canvas.classList.add('disabled');
 
@@ -193,7 +194,7 @@ function getRandomNumber(min, max) {
 }
 
 //functions
-function Draw(x, y, width, height, color) {
+function DrawRect(x, y, width, height, color) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -201,6 +202,22 @@ function Draw(x, y, width, height, color) {
     this.color = color;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+function DrawTriangle(x, y, base, height, baseRatio, color) {
+    this.x = x;
+    this.y = y;
+    this.base = base;
+    this.height = height;
+    this.baseRatio = baseRatio
+    this.color = color;
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y); //base left point
+    ctx.lineTo(this.x + this.base * this.baseRatio, this.y - this.height); //line to top point
+    ctx.lineTo(this.x + this.base, this.y); //line to another base point
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
 }
 
 // powerups
@@ -218,20 +235,11 @@ function invisibleImage() {
 }
 
 // Obstacle Triangle Spikes
-function drawTriangle(x, y, base, height) {
-    ctx.beginPath();
-    ctx.moveTo(x, y); //base left point
-    ctx.lineTo(x + base / 2, y - height); //line to top point
-    ctx.lineTo(x + base, y); //line to another base point
-    ctx.fillStyle = "#39A2DB";
-    ctx.fill();
-    ctx.closePath();
-}
 function triangleSpikes() {
     triangleLeft -= systemSpeed
-    drawTriangle(triangleLeft, canvas.height * 3 / 4 + 1, 50, 20)
-    drawTriangle(triangleLeft + 50, canvas.height * 3 / 4 + 1, 50, 20)
-    drawTriangle(triangleLeft + 100, canvas.height * 3 / 4 + 1, 50, 20)
+    new DrawTriangle(triangleLeft, canvas.height * 3 / 4 + 1, 50, 20, 0.5, '#39A2DB')
+    new DrawTriangle(triangleLeft + 50, canvas.height * 3 / 4 + 1, 50, 20, 0.5, '#39A2DB')
+    new DrawTriangle(triangleLeft + 100, canvas.height * 3 / 4 + 1, 50, 20, 0.5, '#39A2DB')
 }
 
 // Obstacle Circle
@@ -311,10 +319,10 @@ function update() {
     invisibleImage();
     drawRunner();
 
-    var topLayer = new Draw(0, 0, canvas.width, canvas.height / 4, '#39A2DB');
-    var bottomLayer = new Draw(0, canvas.height * 3 / 4, canvas.width, canvas.height / 4, '#39A2DB');
-    var topHole = new Draw(topHoleLeft, 0, widthHole, (canvas.height / 4) + 1, '#A2DBFA');
-    var bottomHole = new Draw(bottomHoleLeft, (canvas.height * 3 / 4) - 1, widthHole, (canvas.height / 4) + 1, '#A2DBFA');
+    var topLayer = new DrawRect(0, 0, canvas.width, canvas.height / 4, '#39A2DB');
+    var bottomLayer = new DrawRect(0, canvas.height * 3 / 4, canvas.width, canvas.height / 4, '#39A2DB');
+    var topHole = new DrawRect(topHoleLeft, 0, widthHole, (canvas.height / 4) + 1, '#A2DBFA');
+    var bottomHole = new DrawRect(bottomHoleLeft, (canvas.height * 3 / 4) - 1, widthHole, (canvas.height / 4) + 1, '#A2DBFA');
 
     //to re-generate new obstacles
     if (bottomHoleLeft < -widthHole) {
@@ -481,24 +489,42 @@ function drawRunner() {
     if (runnerTop == canvas.height * 3 / 4 - sizeOfParticle) {
         degree = 0;
         dDegree = 0;
-        new Draw(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        runnerPositionUp = false;
+        if (runnerShape.value == "square") {
+            new DrawRect(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        } else {
+            new DrawTriangle(runnerLeft, runnerTop + sizeOfParticle, sizeOfParticle, sizeOfParticle, 0.3, runnerColor)
+        }
     } else if (runnerTop < canvas.height * 3 / 4 - sizeOfParticle && runnerTop > canvas.height / 4) {
         var angle = (Math.PI / 180) * (degree += dDegree)
         ctx.save();
         ctx.translate(centerX, centerY);
         ctx.rotate(angle);
         ctx.translate(-centerX, -centerY);
-        new Draw(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        if (runnerShape.value == "square") {
+            new DrawRect(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        } else {
+            if (runnerPositionUp == false) {
+                new DrawTriangle(runnerLeft, runnerTop + sizeOfParticle, sizeOfParticle, sizeOfParticle, 0.3, runnerColor);
+            } else {
+                new DrawTriangle(runnerLeft, runnerTop, sizeOfParticle, -sizeOfParticle, 0.7, runnerColor);
+            }
+        }
         ctx.restore();
     } else if (runnerTop == canvas.height / 4) {
         degree = 0;
         dDegree = 0;
-        new Draw(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        runnerPositionUp = true;
+        if (runnerShape.value == "square") {
+            new DrawRect(runnerLeft, runnerTop, sizeOfParticle, sizeOfParticle, runnerColor);
+        } else {
+            new DrawTriangle(runnerLeft, runnerTop, sizeOfParticle, -sizeOfParticle, 0.7, runnerColor)
+        }
     }
 
     // during rotation
     if (degree > 180) {
-        degree = 1;
+        degree = 180;
         dDegree = 0;
     }
 
