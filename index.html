@@ -11,8 +11,61 @@
 </head>
 
 <body>
-    <img src="./assets/images/clock.png" id="clockImg" class="hide">
-    <img src="./assets/images/invisible.png" id="invisibleImg" class="hide">
+    <!-- modal -->
+    <div id="modal" class="">
+        <div id="close">&times;</div>
+        <div id="modalContent">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>Obstacles</td>
+                    </tr>
+                    <tr>
+                        <td>Easy</td>
+                        <td>Top Hole, Bottom Hole</td>
+                    </tr>
+                    <tr>
+                        <td>Medium</td>
+                        <td>Top Hole, Bottom Hole, Triangle Spikes, Speed increases with Score</td>
+                    </tr>
+                    <tr>
+                        <td>Hard</td>
+                        <td>Top Hole, Bottom Hole, Triangle Spikes, Speed increases with score, Moving Obstacles</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>Powerups</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Coins</div>
+                            <img src="./assets/images/coin.png" id="" class="powerupsImg">
+                        </td>
+                        <td>Gives you additional +5 points and increases your coins collection</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Invisible Portion</div>
+                            <img src="./assets/images/invisible.png" id="invisibleImg" class="powerupsImg">
+                        </td>
+                        <td>Gives runner the power to become invisible for a while to avoid all obstacles and makes the runner invincible</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Slow Timer Portion</div>
+                            <img src="./assets/images/clock-v2.png" id="clockImg" class="powerupsImg">
+                        </td>
+                        <td>It slows down the game for a while</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div id="wrapper">
 
@@ -26,6 +79,7 @@
                     </div>
                 </div>
                 <div id="pauseDiv">
+                    <div><img src="./assets/images/info.png" id="infoImg"></div>
                     <div><img src="./assets/images/settings.png" id="settingsImg"></div>
                     <button id="pause">New Game</button>
                 </div>

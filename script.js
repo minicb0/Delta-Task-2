@@ -18,6 +18,11 @@ var runnerShape = document.getElementById('runnerShape');
 var popup = document.getElementById("popup");
 var popupText = document.getElementById('popupText');
 
+// modal
+var modal = document.getElementById("modal");
+var infoImg = document.getElementById("infoImg");
+var close = document.getElementById("close");
+
 // audio switch on/off variables
 var mute = document.getElementById('muteImg')
 var unmute = document.getElementById('unmuteImg')
@@ -186,6 +191,23 @@ rotateImg.addEventListener('click', () => {
             }
         }
     }
+})
+
+// modal
+infoImg.addEventListener('click', () => {
+    if (gameOn == true) {
+        pause.innerHTML = "Play"
+        cancelAnimationFrame(requestID);
+        backgroundSound.pause();
+        popupText.innerHTML = `The game is being paused! <br> To continue, press Play button`;
+        popup.classList.remove('hide');
+        canvas.classList.add('disabled');
+    }
+    modal.style.display = "block";
+})
+
+close.addEventListener('click', () => {
+    modal.style.display = "none";
 })
 
 // utility function
@@ -375,7 +397,7 @@ function update() {
     if (Math.abs(runnerLeft - invisibleLeft) < 50 && runnerTop == canvas.height * 3 / 4 - sizeOfParticle) {
         invisibleSound.play();
         invisibleLeft = Math.floor(Math.random() * canvas.width) + canvas.width * getRandomNumber(17, 21);
-        console.log("invisible");
+        // console.log("invisible");
         invisibility = true;
         invisibleTimer = 0;
     }
@@ -577,10 +599,15 @@ pause.addEventListener('click', () => {
         pause.innerHTML = "Play"
         cancelAnimationFrame(requestID);
         backgroundSound.pause();
+        popupText.innerHTML = `The game is being paused! <br> To continue, press Play button`;
+        popup.classList.remove('hide');
+        canvas.classList.add('disabled');
     } else if (pause.innerHTML == "Play") {
         pause.innerHTML = "Pause"
         requestID = requestAnimationFrame(animate);
         backgroundSound.play();
+        popup.classList.add('hide');
+        canvas.classList.remove('disabled');
     } else if (pause.innerHTML == "New Game") {
         newGameFunc();
     }
