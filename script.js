@@ -56,7 +56,7 @@ var scoreDisplay;
 //speed of objects
 var systemSpeed = 15;
 var dParticle = 2;
-var dDegree = 6;
+var dDegree = 8;
 var dtopHoleLeft = systemSpeed;
 var dbottomHoleLeft = systemSpeed;
 var circleObsYspeed = 5;
@@ -104,7 +104,7 @@ function mediaQueries() {
         runnerLeft = 40;
         systemSpeed = 5;
         dParticle = 1;
-        dDegree = 3;
+        dDegree = 4;
         dtopHoleLeft = systemSpeed;
         dbottomHoleLeft = systemSpeed;
     } else {
@@ -112,7 +112,7 @@ function mediaQueries() {
         runnerLeft = 80;
         systemSpeed = 15;
         dParticle = 2;
-        dDegree = 6;
+        dDegree = 8;
         dtopHoleLeft = systemSpeed;
         dbottomHoleLeft = systemSpeed;
     }
@@ -406,7 +406,7 @@ function update() {
             dtopHoleLeft = systemSpeed;
             dbottomHoleLeft = systemSpeed;
             dParticle = 1;
-            dDegree = 3;
+            dDegree = 4;
         }
         dtopHoleLeft = systemSpeed;
         dbottomHoleLeft = systemSpeed;
@@ -420,7 +420,7 @@ function update() {
                 if (systemSpeed > 5) {
                     systemSpeed = 5;
                     dParticle = 1;
-                    dDegree = 3;
+                    dDegree = 4;
                     systemSlow = false;
                 }
             }
@@ -433,7 +433,7 @@ function update() {
                 if (systemSpeed > 15) {
                     systemSpeed = 15;
                     dParticle = 2;
-                    dDegree = 6;
+                    dDegree = 8;
                     systemSlow = false;
                 }
             }
@@ -533,13 +533,13 @@ function drawRunner() {
             if (systemSlow == true) {
                 dDegree = 2;
             } else {
-                dDegree = 3;
+                dDegree = 4;
             }
         } else if (systemMini == false) {
             if (systemSlow == true) {
-                dDegree = 3;
+                dDegree = 4;
             } else {
-                dDegree = 6;
+                dDegree = 8;
             }
         }
     }
