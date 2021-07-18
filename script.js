@@ -328,9 +328,24 @@ function detectCollision() {
 
 // update canvas all time
 function update() {
+    // console.log(systemSpeed)
+
     // update the other functions
     if (difficulty.value == "medium" || difficulty.value == "hard") {
         triangleSpikes();
+        
+        // speed increases with score
+        if (scoreDisplay > 40 && systemSlow == false && systemMini == false) {
+            if (systemSpeed < 17.5) {
+                systemSpeed += 0.01;
+                dtopHoleLeft = systemSpeed;
+                dbottomHoleLeft = systemSpeed;
+            } else if (systemSpeed > 17.5 && systemSpeed < 19) {
+                systemSpeed += 0.0005;
+                dtopHoleLeft = systemSpeed;
+                dbottomHoleLeft = systemSpeed;
+            }
+        }
     }
     if (difficulty.value == "hard") {
         circleObstacle();
